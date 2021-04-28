@@ -7,18 +7,18 @@ class Month
 {
   /**
    * 
-   * get value of each month in a year
+   * get monthly value of a year
    * 
-   * @param array $vds - value with many dates   // eg. [ date => value ]
+   * @param array $data - contains date and value as array   // eg. [ [date, value], [date, value] ]
    * 
-   * @return array - return all values in 12 months
+   * @return array - return monthly value of a year
    * 
    * @since   1.0.0
-   * @version 1.0.0
+   * @version 1.1.0
    * @author  Mahmudul Hasan Mithu
    * 
    */
-  public static function months_12_value( array $vds )
+  public static function monthly_value( array $data )
   {
     date_default_timezone_set('UTC');
 
@@ -39,11 +39,11 @@ class Month
       0,
       0
     ];
-    foreach($vds as $date=>$value){
-      $month_number = ((int) date('n', strtotime($date)));
+    foreach($data as $each_date){
+      $month_number = ((int) date('n', strtotime($each_date[0])));
 
       if($month_number<=12)
-        $all_month_value[$month_number-1] += $value;
+        $all_month_value[$month_number-1] += $each_date[1];
     }
 
     return $all_month_value;
